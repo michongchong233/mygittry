@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
+    <script>
+        // 默認是用get請求
+        // axios('https://randomuser.me/api/')
+        axios.get('https://randomuser.me/api/')
+        .then(
+            resolve => { // 請求成功時調用
+                console.log('1. request success')
+                console.log(resolve)
+                console.log(resolve.data)
+            },
+            reject => { // 請求拒絕時調用
+                console.log('1. request reject')
+                console.log(reject)
+                console.log(reject.data)
+            }
+        ).catch(exception => { // 請求有異常時調用
+            console.log("have some error : " + error)
+        })
+        
+        axios.get('https://randomuser.me/api/', {
+            // get參數
+            name: 'mickey',
+            id: 123
+        }).then(resolve =>{
+            console.log('2. request success')
+            console.log(resolve.data)
+        })
+
+        // post請求
+        axios.post('https://hexschool-tutorial.herokuapp.com/api/signup', {
+            // post參數
+            email: 'mickeytest123@gmail.com',
+            password: '1234'
+        }).then(resolve =>{
+            console.log('3. request success')
+            console.log(resolve.data)
+        })
+
+        // 使用參數的方式指定
+        axios({
+            method: 'post',
+            url: 'https://hexschool-tutorial.herokuapp.com/api/signup',
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                email: 'mickeytest123@gmail.com',
+                password: '1234'
+            },
+        }).then(resolve =>{
+            console.log('4. request success')
+            console.log(resolve.data)
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
